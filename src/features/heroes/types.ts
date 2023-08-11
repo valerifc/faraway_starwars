@@ -18,7 +18,14 @@ export type Hero = {
 };
 
 export type HeroesState = {
-  heroes: Hero[];
-  heroesDiff: Map<string, string | string[]>;
+  heroes: FetchHeroesResponse;
+  heroesDiff: { [key: string]: string | string[] };
   hero: Hero;
+};
+
+export type FetchHeroesResponse = {
+  count: number;
+  next: string;
+  previous: null | number;
+  results: Hero[];
 };
