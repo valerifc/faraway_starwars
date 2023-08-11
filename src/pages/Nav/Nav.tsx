@@ -7,12 +7,12 @@ import Container from "@mui/material/Container";
 import RocketIcon from "@mui/icons-material/Rocket";
 import Typography from "@mui/material/Typography";
 import { webRoutes } from "../../constants/webRoutes";
-import { useNavigate } from "react-router-dom";
-
-const FAKE_ID = "1";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -36,13 +36,16 @@ const Nav = () => {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
-              onClick={() => navigate(webRoutes.heroes)}
+              onClick={() => navigate(`/${webRoutes.heroes}`)}
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Heroes
             </Button>
             <Button
-              onClick={() => navigate(`${webRoutes.heroes}/${FAKE_ID}`)}
+              onClick={() =>
+                !location.pathname.match(`/${webRoutes.hero}/`) &&
+                navigate(`/${webRoutes.hero}/${1}`)
+              }
               sx={{ my: 2, color: "white", display: "block" }}
             >
               Hero

@@ -1,37 +1,31 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import Layout from "./pages/Layout/Layout";
-import HeroPage from "./pages/HeroPage";
-import HeroesPage from "./pages/HeroesPage";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
-import { webRoutes } from "./constants/webRoutes";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { blueGrey } from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material";
 import "./index.css";
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      {
-        path: `/${webRoutes.heroes}`,
-        element: <HeroesPage />,
-      },
-      {
-        path: `/${webRoutes.heroes}/:id`,
-        element: <HeroPage />,
-      },
-    ],
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: blueGrey[900],
+    },
+    secondary: {
+      main: "#263238",
+    },
   },
-]);
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>
 );
