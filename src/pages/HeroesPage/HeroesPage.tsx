@@ -1,28 +1,31 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { fetchHeroes, selectHeroes } from "../../features/heroes/heroesSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { Box, Stack, Typography } from "@mui/material";
 
 const HeroesPage = () => {
-  const [heroes, setHeroes] = useState<any>([]);
+  const dispatch = useAppDispatch();
+  const heroes = useAppSelector(selectHeroes);
+
   useEffect(() => {
-    axios.get("https://swapi.dev/api/people").then((res: any) => {
-      console.log(res);
-      setHeroes(res?.data?.results || []);
-    });
+    dispatch(fetchHeroes());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <>
-      <h1>
-        Главная страница, где нужно отобразить список или карточки персонажей
-      </h1>
-      {heroes?.map((hero: any) => {
-        const { name } = hero;
-        return (
-          <>
-            <h5>{name}</h5>
-            <br />
-          </>
-        );
-      })}
+      <Typography variant="h4" sx={{ m: 2 }}>
+        Список персонажей
+      </Typography>
+      <Stack>
+        {(heroes?.results || []).map(({ name }, index) => {
+          return (
+            <Box sx={{ m: 2 }} key={index}>
+              <Typography variant="body1">{name}</Typography>
+            </Box>
+          );
+        })}
+      </Stack>
     </>
   );
 };

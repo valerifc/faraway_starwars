@@ -1,31 +1,36 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { fetchHero, selectHero } from "../../features/heroes/heroesSlice";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
+import { Box, Stack, Typography } from "@mui/material";
 
 const HeroPage = () => {
-  const [hero, setHero] = useState<any>({});
-  useEffect(() => {
-    axios.get(`https://swapi.dev/api/people/${heroId}`).then((res: any) => {
-      console.log(res);
-      setHero(res?.data || []);
-    });
-  }, []);
+  const dispatch = useAppDispatch();
+  const hero = useAppSelector(selectHero);
+
   const { id: heroId } = useParams();
+
+  useEffect(() => {
+    dispatch(fetchHero(+(heroId || 0)));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <>
-      <h1>
-        Cтраница с подробной информацией по выбранному персонажу /:{heroId}
-      </h1>
-      <>
-        {Object.entries(hero)?.map((pair: any) => {
-          const [key, value] = pair;
+      <Typography variant="h4" sx={{ m: 2 }}>
+        Персонаж /:{heroId}
+      </Typography>
+      <Stack>
+        {Object.entries(hero)?.map(([key, value], index) => {
           return (
-            <p>
-              {key}: {value}
-            </p>
+            <Box sx={{ m: 1, p: 1 }} key={index}>
+              <Typography variant="body1">
+                {key}: {value}
+              </Typography>
+            </Box>
           );
         })}
-      </>
+      </Stack>
     </>
   );
 };
