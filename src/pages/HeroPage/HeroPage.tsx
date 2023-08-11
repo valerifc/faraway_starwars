@@ -6,9 +6,8 @@ import { Box, Stack, Typography } from "@mui/material";
 
 const HeroPage = () => {
   const dispatch = useAppDispatch();
+  const { heroId } = useParams();
   const hero = useAppSelector(selectHero);
-
-  const { id: heroId } = useParams();
 
   useEffect(() => {
     dispatch(fetchHero(+(heroId || 0)));
@@ -17,13 +16,13 @@ const HeroPage = () => {
 
   return (
     <>
-      <Typography variant="h4" sx={{ m: 2 }}>
-        Персонаж /:{heroId}
+      <Typography variant="h4" sx={{ mt: 2, mb: 2 }}>
+        Hero /:{heroId}
       </Typography>
       <Stack>
         {Object.entries(hero)?.map(([key, value], index) => {
           return (
-            <Box sx={{ m: 1, p: 1 }} key={index}>
+            <Box sx={{ mt: 2, mb: 2 }} key={index}>
               <Typography variant="body1">
                 {key}: {value}
               </Typography>

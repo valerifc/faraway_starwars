@@ -11,11 +11,13 @@ const initialState: HeroesState = {
   hero: heroEmpty,
 };
 
-export const fetchHeroes = createAsyncThunk(
+export const fetchHeroes = createAsyncThunk<FetchHeroesResponse, number>(
   "heroes/fetchHeroes",
-  async (_payload, thunkAPI) => {
+  async (page, thunkAPI) => {
     try {
-      const response = await axios.get<FetchHeroesResponse>(`${swapi.people}`);
+      const response = await axios.get<FetchHeroesResponse>(
+        `${swapi.people}/?page=${"" + page}`
+      );
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({

@@ -25,7 +25,7 @@ export type HeroesState = {
 
 export type FetchHeroesResponse = {
   count: number;
-  next: string;
-  previous: null | number;
+  next: null | string;
+  previous: null | string;
   results: Hero[];
 };
