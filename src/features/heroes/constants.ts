@@ -18,3 +18,10 @@ export const heroEmpty: Hero = {
   edited: "",
   url: "",
 };
+
+export const fetchHeroesResponseEmpty = {
+  count: 0,
+  next: "",
+  previous: null,
+  results: [],
+};
