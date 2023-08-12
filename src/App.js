@@ -1,5 +1,5 @@
 import React from "react";
-import Layout from "./pages/Layout/Layout";
+import Layout from "./components/Layout/Layout";
 import HeroPage from "./pages/HeroPage";
 import HeroesPage from "./pages/HeroesPage";
 import { webRoutes } from "./constants/webRoutes";
