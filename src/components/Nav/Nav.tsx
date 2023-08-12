@@ -9,6 +9,18 @@ import Typography from "@mui/material/Typography";
 import { webRoutes } from "../../constants/webRoutes";
 import { useLocation, useNavigate } from "react-router-dom";
 
+const routes = [
+  {
+    title: "Heroes",
+    url: `/${webRoutes.heroes}`,
+  },
+  {
+    title: "Hero",
+    url: `/${webRoutes.hero}/${1}`,
+    pattern: `/${webRoutes.hero}/`,
+  },
+];
+
 const Nav = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -17,7 +29,7 @@ const Nav = () => {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <RocketIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
+          <RocketIcon sx={{ display: "flex", mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -34,22 +46,27 @@ const Nav = () => {
           >
             STAR WARS
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            <Button
-              onClick={() => navigate(`/${webRoutes.heroes}`)}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Heroes
-            </Button>
-            <Button
-              onClick={() =>
-                !location.pathname.match(`/${webRoutes.hero}/`) &&
-                navigate(`/${webRoutes.hero}/${1}`)
-              }
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
-              Hero
-            </Button>
+          <Box sx={{ flexGrow: 1, display: "flex" }}>
+            {routes.map(({ title, url, pattern }) => {
+              const isCurrent = location.pathname.match(pattern || url);
+              return (
+                <Button
+                  onClick={() => navigate(url)}
+                  sx={{
+                    ...{ my: 2, color: "white", display: "block" },
+                    ...(isCurrent
+                      ? {
+                          opacity: "0.5",
+                          cursor: "auto",
+                          pointerEvents: "none",
+                        }
+                      : {}),
+                  }}
+                >
+                  {title}
+                </Button>
+              );
+            })}
           </Box>
         </Toolbar>
       </Container>
