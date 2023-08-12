@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PageTitle from "../../components/PageTitle";
 import SearchIcon from "@mui/icons-material/Search";
 import ModalAttention from "../../components/modals/Attention/Attention";
 import { webRoutes } from "../../constants/webRoutes";
@@ -18,7 +19,6 @@ import {
   Typography,
   TablePagination,
 } from "@mui/material";
-import PageTitle from "../../components/PageTitle";
 
 const HeroesPage = () => {
   const dispatch = useAppDispatch();

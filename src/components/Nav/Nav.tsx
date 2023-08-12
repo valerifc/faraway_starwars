@@ -16,7 +16,7 @@ const routes = [
   },
   {
     title: "Hero",
-    url: `/${webRoutes.hero}/${1}`,
+    url: `/${webRoutes.hero}/${20}`,
     pattern: `/${webRoutes.hero}/`,
   },
 ];

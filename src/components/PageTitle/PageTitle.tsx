@@ -1,11 +1,11 @@
 import React from "react";
 import Typography from "@mui/material/Typography";
 
-type Props = {
+type PageTitleProps = {
   children: JSX.Element | string;
 };
 
-const PageTitle: React.FC<Props> = ({ children }) => {
+const PageTitle: React.FC<PageTitleProps> = ({ children }) => {
   return (
     <Typography
       variant="h4"

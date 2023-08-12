@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
+import PageTitle from "../../components/PageTitle";
 import { useParams } from "react-router-dom";
 import { format, parseISO } from "date-fns";
 import { fetchHero, selectHero } from "../../features/heroes/heroesSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Box, Stack, Typography } from "@mui/material";
-import PageTitle from "../../components/PageTitle";
 
 const HeroPage = () => {
   const dispatch = useAppDispatch();
