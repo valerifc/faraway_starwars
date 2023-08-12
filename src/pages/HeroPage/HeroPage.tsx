@@ -4,6 +4,7 @@ import { format, parseISO } from "date-fns";
 import { fetchHero, selectHero } from "../../features/heroes/heroesSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Box, Stack, Typography } from "@mui/material";
+import PageTitle from "../../components/PageTitle";
 
 const HeroPage = () => {
   const dispatch = useAppDispatch();
@@ -17,18 +18,9 @@ const HeroPage = () => {
 
   return (
     <>
-      <Typography
-        variant="h4"
-        sx={{
-          mt: 2,
-          mb: 2,
-          fontFamily: "monospace",
-          fontWeight: 700,
-          letterSpacing: ".3rem",
-        }}
-      >
-        Hero /:{heroId}
-      </Typography>
+      <PageTitle>
+        <>Hero /:{heroId}</>
+      </PageTitle>
       <Stack>
         {Object.entries(hero)?.map(([key, value], index) => {
           return (

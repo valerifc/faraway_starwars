@@ -18,6 +18,7 @@ import {
   Typography,
   TablePagination,
 } from "@mui/material";
+import PageTitle from "../../components/PageTitle";
 
 const HeroesPage = () => {
   const dispatch = useAppDispatch();
@@ -65,18 +66,7 @@ const HeroesPage = () => {
   return (
     <>
       <ModalAttention />
-      <Typography
-        variant="h4"
-        sx={{
-          mt: 2,
-          mb: 2,
-          fontFamily: "monospace",
-          fontWeight: 700,
-          letterSpacing: ".3rem",
-        }}
-      >
-        Character List
-      </Typography>
+      <PageTitle>Character List</PageTitle>
       <Paper
         component="form"
         sx={{
