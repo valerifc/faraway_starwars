@@ -1,4 +1,4 @@
-import { Hero } from "./types";
+import { Hero, FetchHeroesResponse } from "./types";
 
 export const heroEmpty: Hero = {
   name: "",
@@ -19,7 +19,7 @@ export const heroEmpty: Hero = {
   url: "",
 };
 
-export const fetchHeroesResponseEmpty = {
+export const fetchHeroesResponseEmpty: FetchHeroesResponse = {
   count: 0,
   next: "",
   previous: null,

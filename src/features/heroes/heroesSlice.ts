@@ -66,13 +66,11 @@ export const heroesSlice = createSlice({
   },
   extraReducers(builder) {
     builder
-      .addCase(fetchHeroes.pending, (state) => {
-        state.heroes = fetchHeroesResponseEmpty;
-      })
+      .addCase(fetchHeroes.pending, () => {})
       .addCase(fetchHeroes.fulfilled, (state, action) => {
         state.heroes = action.payload;
       })
-      .addCase(fetchHeroes.rejected, (state) => {})
+      .addCase(fetchHeroes.rejected, () => {})
       .addCase(fetchHero.pending, (state) => {
         state.hero = heroEmpty;
       })
