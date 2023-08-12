@@ -1,0 +1,39 @@
+#universe_container {
+  overflow: hidden;
+  height: 100%;
+}
+
+#universe {
+  position: relative;
+}
+
+.star0 {
+  height: 2px;
+  width: 2px;
+  opacity: 0.5;
+  position: absolute;
+}
+
+.star1 {
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  opacity: 0.5;
+  position: absolute;
+}
+
+.star2 {
+  height: 4px;
+  width: 4px;
+  border-radius: 50%;
+  opacity: 0.5;
+  position: absolute;
+}
+
+.star3 {
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  opacity: 0.5;
+  position: absolute;
+}
