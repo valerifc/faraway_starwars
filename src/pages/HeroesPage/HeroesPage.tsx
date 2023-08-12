@@ -1,33 +1,56 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import ModalAttention from "../../components/modals/Attention/Attention";
 import { webRoutes } from "../../constants/webRoutes";
 import { fetchHeroes, selectHeroes } from "../../features/heroes/heroesSlice";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { Box, Grid, Stack, Typography, TablePagination } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Paper,
+  Stack,
+  InputBase,
+  IconButton,
+  Typography,
+  TablePagination,
+} from "@mui/material";
+import { openModalAttention } from "../../features/modals/modalsSlice";
 
 const HeroesPage = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
   const heroes = useAppSelector(selectHeroes);
+  const [searchText, setSearchText] = useState("");
 
+  const [searchParams] = useSearchParams();
   const page = searchParams.get("page");
+  const search = searchParams.get("search");
 
   useEffect(() => {
     if (!page) {
       navigate(`/${webRoutes.heroes}?page=1`);
       return;
     }
-    dispatch(fetchHeroes(+(page || 1)));
+    setSearchText(search || "");
+    dispatch(fetchHeroes({ page: +(page || 1), search }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, search]);
 
   const handleChangePage = (newPage: number) => {
-    navigate(`/${webRoutes.heroes}?page=${newPage + 1}`);
+    if (searchText !== search)
+      dispatch(
+        openModalAttention({
+          context:
+            "Search Hero text will be lost. To avoid this, click on the button next to the Search Hero text.",
+        })
+      );
+    else navigate(`/${webRoutes.heroes}?page=${newPage + 1}&search=${search}`);
   };
 
   return (
     <>
+      <ModalAttention />
       <Typography
         variant="h4"
         sx={{
@@ -40,6 +63,33 @@ const HeroesPage = () => {
       >
         Character List
       </Typography>
+      <Paper
+        component="form"
+        sx={{
+          p: "2px 4px",
+          display: "flex",
+          alignItems: "center",
+          width: 325,
+          mb: 2,
+        }}
+      >
+        <InputBase
+          sx={{ ml: 1, flex: 1 }}
+          placeholder="Search Your Hero"
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+        />
+        <IconButton
+          type="button"
+          sx={{ p: "10px" }}
+          aria-label="search"
+          onClick={() =>
+            navigate(`/${webRoutes.heroes}?page=1&search=${searchText}`)
+          }
+        >
+          <SearchIcon />
+        </IconButton>
+      </Paper>
       <Stack>
         {(heroes?.results || []).map(
           ({ name, gender, height, mass, url }, index) => {
