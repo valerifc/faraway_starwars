@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { format, parseISO } from "date-fns";
 import { fetchHero, selectHero } from "../../features/heroes/heroesSlice";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { Box, Stack, Typography } from "@mui/material";
@@ -16,7 +17,16 @@ const HeroPage = () => {
 
   return (
     <>
-      <Typography variant="h4" sx={{ mt: 2, mb: 2 }}>
+      <Typography
+        variant="h4"
+        sx={{
+          mt: 2,
+          mb: 2,
+          fontFamily: "monospace",
+          fontWeight: 700,
+          letterSpacing: ".3rem",
+        }}
+      >
         Hero /:{heroId}
       </Typography>
       <Stack>
@@ -24,7 +34,10 @@ const HeroPage = () => {
           return (
             <Box sx={{ mt: 2, mb: 2 }} key={index}>
               <Typography variant="body1">
-                {key}: {value}
+                {key}:{" "}
+                {(key === "created" || key === "edited") && value
+                  ? format(parseISO(value as string), "dd.MM.yyyy HH:mm")
+                  : value}
               </Typography>
             </Box>
           );
