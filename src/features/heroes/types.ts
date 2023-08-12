@@ -29,3 +29,5 @@ export type FetchHeroesResponse = {
   previous: null | string;
   results: Hero[];
 };
+
+export type FetchHeroesThunkArg = { page: number; search: string | null };

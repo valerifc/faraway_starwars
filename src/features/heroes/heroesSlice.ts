@@ -2,7 +2,12 @@ import axios from "axios";
 import { swapi } from "../../constants/urls";
 import { heroEmpty, fetchHeroesResponseEmpty } from "./constants";
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { Hero, HeroesState, FetchHeroesResponse } from "./types";
+import {
+  Hero,
+  HeroesState,
+  FetchHeroesResponse,
+  FetchHeroesThunkArg,
+} from "./types";
 import type { RootState } from "../../app/store";
 
 const initialState: HeroesState = {
@@ -11,21 +16,21 @@ const initialState: HeroesState = {
   hero: heroEmpty,
 };
 
-export const fetchHeroes = createAsyncThunk<FetchHeroesResponse, number>(
-  "heroes/fetchHeroes",
-  async (page, thunkAPI) => {
-    try {
-      const response = await axios.get<FetchHeroesResponse>(
-        `${swapi.people}/?page=${"" + page}`
-      );
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue({
-        status: error,
-      });
-    }
+export const fetchHeroes = createAsyncThunk<
+  FetchHeroesResponse,
+  FetchHeroesThunkArg
+>("heroes/fetchHeroes", async ({ page, search }, thunkAPI) => {
+  try {
+    const response = await axios.get<FetchHeroesResponse>(
+      `${swapi.people}/?page=${"" + page}${search ? `&search=${search}` : ""}`
+    );
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({
+      status: error,
+    });
   }
-);
+});
 
 export const fetchHero = createAsyncThunk<Hero, number>(
   "heroes/fetchHero",
