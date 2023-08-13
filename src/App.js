@@ -3,15 +3,11 @@ import Layout from "./components/Layout/Layout";
 import HeroPage from "./pages/HeroPage";
 import HeroesPage from "./pages/HeroesPage";
 import { webRoutes } from "./constants/webRoutes";
-import {
-  Navigate,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
+import { Navigate, RouterProvider, createHashRouter } from "react-router-dom";
 import "./App.css";
 require("./components/Universe/universe.scss");
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Navigate to={`/${webRoutes.heroes}?page=1`} replace />,
