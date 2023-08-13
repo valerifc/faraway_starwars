@@ -11,7 +11,7 @@ const Layout = () => {
       <Nav />
       <div style={{ flex: 1 }}>
         <Universe starColor={theme.palette.primary.main}>
-          <Container maxWidth="xl">
+          <Container maxWidth="xl" sx={{ pb: 2 }}>
             <Outlet />
           </Container>
         </Universe>

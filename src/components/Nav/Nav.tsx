@@ -51,6 +51,7 @@ const Nav = () => {
               const isCurrent = location.pathname.match(pattern || url);
               return (
                 <Button
+                  key={url}
                   onClick={() => navigate(url)}
                   sx={{
                     ...{ my: 2, color: "white", display: "block" },
