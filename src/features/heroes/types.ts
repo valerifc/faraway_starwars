@@ -19,7 +19,7 @@ export type Hero = {
 
 export type HeroesState = {
   heroes: FetchHeroesResponse;
-  heroesDiff: { [key: string]: string | string[] };
+  heroesDiff: { [heroId: string]: Partial<Hero> };
   hero: Hero;
 };
 

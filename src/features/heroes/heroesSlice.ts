@@ -53,10 +53,7 @@ export const heroesSlice = createSlice({
     setHeroes: (state, action: PayloadAction<FetchHeroesResponse>) => {
       state.heroes = action.payload;
     },
-    setHeroesDiff: (
-      state,
-      action: PayloadAction<[string, string | string[]]>
-    ) => {
+    setHeroesDiff: (state, action: PayloadAction<[string, Partial<Hero>]>) => {
       const [key, value] = action.payload;
       state.heroesDiff[key] = value;
     },
