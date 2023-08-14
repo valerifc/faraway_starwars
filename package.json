@@ -1,7 +1,21 @@
 {
   "name": "faraway_starwars",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "author": "Valeriy Posokhov <valerifc2@gmail.com> (https://github.com/valerifc/)",
   "homepage": "https://valerifc.github.io/faraway_starwars",
+  "license": "SEE LICENSE IN FILE 'LICENSE'",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/valerifc/faraway_starwars.git"
+  },
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@mui/icons-material": "^5.14.3",
     "@mui/material": "^5.14.4",
@@ -23,14 +37,6 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "gh-pages": "^6.0.0"
-  },
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
